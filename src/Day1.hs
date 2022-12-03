@@ -17,23 +17,13 @@ instance Day Day1Task where
 
     part1 _ state = do
         l <- input state
-        putStrLn $ l !! 0
-        return 1
+        let elves = (sumCallories . makeNumbers . splitOnEmpty) l
+        return $ greatest elves
 
     part2 _ state = do
         l <- input state
-        putStrLn $ l !! 1
-        return 2
-
-day1 :: IO ()
-day1 = do
-    contents <- getFileLines "res/1.txt"
-    let elves = (sumCallories . makeNumbers . splitOnEmpty) contents
-    let result = greatest elves
-    putStrLn $ "The Elf Carrying the most had " <> show result <> " Calories"
-    let top3 = topN 3 elves
-    putStrLn $ "The top three Elves had " <> show top3 <> ", adding up to " <> (show $ sum top3) <> " Calories"
-    return ()
+        let elves = (sumCallories . makeNumbers . splitOnEmpty) l
+        return $ sum $ topN 3 elves
 
 greatest :: [Int] -> Int
 greatest = foldl (\l r -> if l > r then l else r) 0
