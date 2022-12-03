@@ -1,4 +1,4 @@
-module Lib.Days(runDay, AdventState(input), Day(Result1, Result2, name, index, part1, part2)) where
+module Lib.Days(runDay, AdventState(..), Day(..)) where
 
 import Data.IORef
 import Data.Kind

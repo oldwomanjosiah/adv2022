@@ -8,14 +8,21 @@ import Data.Foldable
 import System.Environment
 import System.Exit
 
+commaSeparated :: [String] -> String
+commaSeparated = inner ""
+    where
+    inner :: String -> [String] -> String
+    inner current [] = current
+    inner current (last:[]) = current <> last
+    inner current (next:rest) = inner (current <> next <> ", ") rest
+
 getDay :: [String] -> (Either String DynDay)
 getDay [] =
-    Left $ ("No Days Provided, valid values are [" <> (foldMap name days) <> "]")
+    Left $ ("No Days Provided, valid values are [" <> (commaSeparated . map name $ days) <> "]")
 getDay (n:_) =
     case find (\it -> name it == n) days of
         Just day -> Right day
-        Nothing -> let names = map name days in
-            Left $ fold $ [n, " is not a valid day task\nvalid values are ["] ++ names ++ ["]"]
+        Nothing -> Left $ n <> " is not a valid day task\nvalid values are [" <> (commaSeparated . map name $ days) <> "]"
 
 -- |Print optional failure information, and the usage of the program
 usage :: forall a. Maybe String -> IO a
