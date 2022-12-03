@@ -1,13 +1,11 @@
 module Lib(
-    day2,
     days,
     DynDay
 ) where
 
 import qualified Day1
-import Day2 (day2)
+import qualified Day2
 import Lib.Days
-import Data.Monoid
 
 data DynDay = forall d. Day d => MkDynDay d
 data DynShow = forall s. Show s => MkDynShow s
@@ -29,5 +27,8 @@ pack :: forall d. Day d => d -> DynDay
 pack = MkDynDay
 
 days :: [DynDay]
-days = [pack Day1.task]
+days = [
+        pack Day1.task,
+        pack Day2.task
+    ]
 

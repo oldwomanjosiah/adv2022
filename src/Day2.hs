@@ -1,6 +1,7 @@
-module Day2(day2) where
+module Day2(task) where
 
 import Lib.Util
+import Lib.Days
 import Data.Data
 import Control.Exception
 import Control.Applicative
@@ -8,6 +9,24 @@ import Control.Applicative
 -- newtype Rock = Rock ()
 -- newtype Paper = Paper ()
 -- newtype Scissors = Scissors ()
+
+newtype Day2Task = Day2Task ()
+task = Day2Task ()
+
+instance Day Day2Task where
+    type Result1 Day2Task = Int
+    type Result2 Day2Task = Int
+
+    name _ = "day-2"
+    index _ = 2
+
+    part1 _ state = do
+        l <- input state
+        return $ sum $ map roundScore $ unwrap $ makeStrat l
+
+    part2 _ state = do
+        l <- input state
+        return $ sum $ map roundScore $ makeResponses $ unwrap $ makeStrat l
 
 data Play = Rock | Paper | Scissors
     deriving(Eq, Ord)
@@ -51,16 +70,6 @@ instance FromStr Strategy where
     parse "Y" = Right Draw
     parse "Z" = Right Win
     parse str = Left $ InvalidPlay str
-
-day2 :: IO ()
-day2 = do
-    lines <- getFileLines "res/2.txt"
-    let playBased = sum $ map roundScore $ unwrap $ makeStrat lines
-    let outcomeBased = sum $ map roundScore $ makeResponses $ unwrap $ makeStrat lines
-
-    putStrLn $ "Play Based:    " <> show playBased
-    putStrLn $ "Outcome Based: " <> show outcomeBased
-    return ()
 
 roundScore :: Round -> Score
 roundScore = liftA2 (+) (playScore . snd) $ outcomeScore . uncurry outcome
