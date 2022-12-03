@@ -1,8 +1,33 @@
 module Lib(
-    day1,
-    day2
+    day2,
+    days,
+    DynDay
 ) where
 
-import Day1 (day1)
+import qualified Day1
 import Day2 (day2)
+import Lib.Days
+import Data.Monoid
+
+data DynDay = forall d. Day d => MkDynDay d
+data DynShow = forall s. Show s => MkDynShow s
+
+instance Day (DynDay) where
+    type Result1 DynDay = DynShow
+    type Result2 DynDay = DynShow
+
+    name (MkDynDay d) = name d
+    index (MkDynDay d) = index d
+
+    part1 (MkDynDay d) s = fmap MkDynShow $ part1 d s
+    part2 (MkDynDay d) s = fmap MkDynShow $ part2 d s
+
+instance Show (DynShow) where
+    show (MkDynShow s) = show s
+
+pack :: forall d. Day d => d -> DynDay
+pack = MkDynDay
+
+days :: [DynDay]
+days = [pack Day1.task]
 

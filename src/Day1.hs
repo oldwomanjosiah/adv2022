@@ -1,6 +1,29 @@
-module Day1(day1) where
+module Day1(task) where
 
 import Lib.Util
+import Lib.Days
+
+newtype Day1Task = Day1Task ()
+
+task :: Day1Task
+task = Day1Task ()
+
+instance Day Day1Task where
+    type Result1 Day1Task = Int
+    type Result2 Day1Task = Int
+
+    name _ = "day-1"
+    index _ = 1
+
+    part1 _ state = do
+        l <- input state
+        putStrLn $ l !! 0
+        return 1
+
+    part2 _ state = do
+        l <- input state
+        putStrLn $ l !! 1
+        return 2
 
 day1 :: IO ()
 day1 = do

@@ -80,7 +80,8 @@ outcome theirs ours = let
         theirScore = playScore theirs
         ourScore = playScore ours
     in
-        -- 
+        -- The score for the play that beats yours is always one less than your
+        -- score. (mod 3, because there are three options)
         case (theirScore - ourScore) `mod` 3 of
             0 -> Draw
             1 -> Lose
