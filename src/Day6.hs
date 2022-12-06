@@ -8,7 +8,7 @@ instance Day Task where
     type Result1 Task = Int
     type Result2 Task = Int
 
-    name _ = "Day6"
+    name _ = "day6"
     index _ = 6
 
     part1 _ a =

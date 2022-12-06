@@ -12,7 +12,7 @@ instance Day Day1Task where
     type Result1 Day1Task = Int
     type Result2 Day1Task = Int
 
-    name _ = "day-1"
+    name _ = "day1"
     index _ = 1
 
     part1 _ state = do
