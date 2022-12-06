@@ -7,6 +7,7 @@ import qualified Day1
 import qualified Day2
 import qualified Day3
 import qualified Day4
+import qualified Day5
 import Lib.Days
 
 data DynDay = forall d. Day d => MkDynDay d
@@ -33,6 +34,7 @@ days = [
         pack Day1.task,
         pack Day2.task,
         pack Day3.Task,
-        pack Day4.Task
+        pack Day4.Task,
+        pack Day5.Task
     ]
 
