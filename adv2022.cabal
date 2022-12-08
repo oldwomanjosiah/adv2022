@@ -31,6 +31,7 @@ library
       Day4
       Day5
       Day6
+      Day7
       Lib
       Lib.Days
       Lib.Util
@@ -42,6 +43,7 @@ library
   build-depends:
       base >=4.7 && <5
     , directory
+    , unordered-containers
   default-language: Haskell2010
 
 executable adv2022-exe
@@ -55,6 +57,7 @@ executable adv2022-exe
       adv2022
     , base >=4.7 && <5
     , directory
+    , unordered-containers
   default-language: Haskell2010
 
 test-suite adv2022-test
@@ -69,4 +72,5 @@ test-suite adv2022-test
       adv2022
     , base >=4.7 && <5
     , directory
+    , unordered-containers
   default-language: Haskell2010
